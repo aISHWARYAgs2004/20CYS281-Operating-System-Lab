@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+
+void *democlass(void *args)
+{
+  int *e = (void *)args;
+  int i;
+  int t1 = 0, t2 = 1;
+  int t3 = t1 + t2;
+  printf("Fibonacci Series: %d %d ", t1, t2);
+
+  for (i = 3; i <= *e; ++i) 
+  {
+    printf("%d ", t3);
+    t1 = t2;
+    t2 = t3;
+    t3 = t1 + t2;
+  }
+        
+
+    //%ld (long)args
+}
+
+int main(){
+    pthread_t thread;  
+    printf("%ld\n",(long)&thread); //prints thread id
+    printf("Enter terms: ");
+    int x;
+    scanf("%d",&x);
+    pthread_create(&thread,NULL,democlass,(void *)&x);
+    pthread_join(thread,NULL);
+    //pthread_exit(NULL);
+    return 0;
+    
+}
